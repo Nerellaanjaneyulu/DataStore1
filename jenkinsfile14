@@ -6,6 +6,10 @@ pipeline {
      string(name: "App_Version", description: "provide application version")
   }
 
+environment {
+    DOCKERHUB_CREDENTIALS=credentials("dockerhub")
+  }
+
 stages {
     stage("Checkout") {
       steps {
@@ -63,6 +67,19 @@ stages {
           echo "-------- Tagging Docker Image --------"
           docker tag datastore:"${App_Version}" 8072388539/datastore:"${App_Version}"
           echo "-------- Tagging Docker Image Completed."
+        """
+      }
+    }
+    tage("Loggingin & Pushing Docker Image") {
+      steps {
+        sh """
+          echo "-------- Logging To DockerHub --------"
+          docker login -u $DOCKERHUB_CREDENTIALS_USR --password $DOCKERHUB_CREDENTIALS_PSW
+          echo "-------- DockerHub Login Successful --------"
+
+          echo "-------- Pushing Docker Image To DockerHub --------"
+          docker push 8072388539/datastore:"${App_Version}"
+          echo "-------- Docker Image Pushed Successfully --------"
         """
       }
     }
