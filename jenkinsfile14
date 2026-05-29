@@ -34,7 +34,7 @@ pipeline {
           echo "-------- Pushing Artifacts To S3 Completed --------"
         """
       }
-    
+    }
   }
 }
 
