@@ -70,7 +70,7 @@ stages {
         """
       }
     }
-    tage("Loggingin & Pushing Docker Image") {
+    stage("Loggingin & Pushing Docker Image") {
       steps {
         sh """
           echo "-------- Logging To DockerHub --------"
