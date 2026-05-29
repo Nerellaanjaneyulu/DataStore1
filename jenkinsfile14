@@ -2,7 +2,11 @@ pipeline {
 
   agent any
 
- stages {
+  parameters {
+     string(name: "App_Version", description: "provide application version")
+  }
+
+stages {
     stage("Checkout") {
       steps {
         checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Nerellaanjaneyulu/DataStore1.git']])
